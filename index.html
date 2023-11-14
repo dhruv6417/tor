@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IP Address Display</title>
+</head>
+<body>
+
+    <h1>Your IP Address</h1>
+    
+    <p id="ip-address"></p>
+
+    <script>
+        // Function to get the user's IP address
+        async function getIPAddress() {
+            try {
+                const response = await fetch('https://api64.ipify.org?format=json');
+                const data = await response.json();
+                return data.ip;
+            } catch (error) {
+                console.error('Error fetching IP address:', error);
+                return 'Unable to fetch IP address';
+            }
+        }
+
+        // Display the user's IP address
+        async function displayIPAddress() {
+            const ipAddress = await getIPAddress();
+            document.getElementById('ip-address').innerText = `Your IP Address: ${ipAddress}`;
+        }
+
+        // Call the displayIPAddress function when the page loads
+        window.onload = displayIPAddress;
+    </script>
+
+</body>
+</html>
